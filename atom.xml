@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fairylss.cn/"/>
-  <updated>2018-08-28T12:24:08.402Z</updated>
+  <updated>2018-08-29T00:56:44.183Z</updated>
   <id>http://fairylss.cn/</id>
   
   <author>
@@ -17,25 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>a</title>
+    <title>终于搭建好了。markdown试一下。</title>
     <link href="http://fairylss.cn/2018/08/28/a/"/>
     <id>http://fairylss.cn/2018/08/28/a/</id>
     <published>2018-08-28T12:24:08.000Z</published>
-    <updated>2018-08-28T12:24:08.402Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://fairylss.cn/2018/08/28/hello-world/"/>
-    <id>http://fairylss.cn/2018/08/28/hello-world/</id>
-    <published>2018-08-28T08:29:52.943Z</published>
-    <updated>2018-08-28T08:29:52.943Z</updated>
+    <updated>2018-08-29T00:56:44.183Z</updated>
     
     <summary type="html">
     
@@ -43,7 +29,9 @@
       
         
         
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+          &lt;pre&gt;&lt;code&gt;只能说努力吧。技术突飞猛进的一个暑假，
+也是养成习惯的一个暑假。加油！
+&lt;/code&gt;&lt;/pre&gt;
         
       
     
