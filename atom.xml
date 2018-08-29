@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fairylss.cn/"/>
-  <updated>2018-08-29T00:56:44.183Z</updated>
+  <updated>2018-08-29T01:09:23.370Z</updated>
   <id>http://fairylss.cn/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>终于搭建好了。markdown试一下。</title>
+    <title>终于搭建好了。</title>
     <link href="http://fairylss.cn/2018/08/28/a/"/>
     <id>http://fairylss.cn/2018/08/28/a/</id>
     <published>2018-08-28T12:24:08.000Z</published>
-    <updated>2018-08-29T00:56:44.183Z</updated>
+    <updated>2018-08-29T01:09:23.370Z</updated>
     
     <summary type="html">
     
@@ -29,8 +29,8 @@
       
         
         
-          &lt;pre&gt;&lt;code&gt;只能说努力吧。技术突飞猛进的一个暑假，
-也是养成习惯的一个暑假。加油！
+          &lt;pre&gt;&lt;code&gt;只能说努力吧。技术突飞猛进的一个暑假，也是养成习惯的一个暑假。
+接下来会总结一些算法数据结构和一些面经的解答，书单什么的。都是自己的理解。希望能更深入的理解这些知识，为来年的面试做准备。
 &lt;/code&gt;&lt;/pre&gt;
         
       
