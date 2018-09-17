@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fairylss.cn/"/>
-  <updated>2018-08-29T01:14:06.105Z</updated>
+  <updated>2018-09-17T10:57:12.703Z</updated>
   <id>http://fairylss.cn/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>suggest</title>
+    <link href="http://fairylss.cn/2018/08/29/suggest/"/>
+    <id>http://fairylss.cn/2018/08/29/suggest/</id>
+    <published>2018-08-29T06:03:43.000Z</published>
+    <updated>2018-09-17T10:57:12.703Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;#整理个书单和路线&lt;/p&gt;
+&lt;hr&gt;
+&lt;div&gt;&lt;br&gt;    &lt;p&gt;   
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CountDownLatch运用场景(1)</title>
+    <link href="http://fairylss.cn/2018/08/29/CountDownLatch-one/"/>
+    <id>http://fairylss.cn/2018/08/29/CountDownLatch-one/</id>
+    <published>2018-08-29T05:46:35.000Z</published>
+    <updated>2018-08-29T05:59:55.997Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;最近阅读了J.U.C(java.util.concurrent)的一些源码，有空来总结一点东西。&lt;/p&gt;
+&lt;p&gt;CountdownLatch也叫闭锁，它可以使一(多)个主线程必须等待其他线程完成操作后再进行执行。它内部主要是维护了一个计数器，主线程先执行await，如果计数
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>终于搭建好了。</title>

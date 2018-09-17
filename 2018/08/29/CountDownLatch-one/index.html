@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="个人随笔">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LSS&#39;s Blog">
-<meta property="og:url" content="http://fairylss.cn/index.html">
+<meta name="description" content="最近阅读了J.U.C(java.util.concurrent)的一些源码，有空来总结一点东西。 CountdownLatch也叫闭锁，它可以使一(多)个主线程必须等待其他线程完成操作后再进行执行。它内部主要是维护了一个计数器，主线程先执行await，如果计数器大于0的话，那么就阻塞等待。当一个线程完成任务后，计数器的值减1，直到当计数器为0时，表示所有的线程已经完成任务，等待的主线程被唤醒然后继">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CountDownLatch运用场景(1)">
+<meta property="og:url" content="http://fairylss.cn/2018/08/29/CountDownLatch-one/index.html">
 <meta property="og:site_name" content="LSS&#39;s Blog">
-<meta property="og:description" content="个人随笔">
+<meta property="og:description" content="最近阅读了J.U.C(java.util.concurrent)的一些源码，有空来总结一点东西。 CountdownLatch也叫闭锁，它可以使一(多)个主线程必须等待其他线程完成操作后再进行执行。它内部主要是维护了一个计数器，主线程先执行await，如果计数器大于0的话，那么就阻塞等待。当一个线程完成任务后，计数器的值减1，直到当计数器为0时，表示所有的线程已经完成任务，等待的主线程被唤醒然后继">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-29T05:59:55.997Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LSS&#39;s Blog">
-<meta name="twitter:description" content="个人随笔">
+<meta name="twitter:title" content="CountDownLatch运用场景(1)">
+<meta name="twitter:description" content="最近阅读了J.U.C(java.util.concurrent)的一些源码，有空来总结一点东西。 CountdownLatch也叫闭锁，它可以使一(多)个主线程必须等待其他线程完成操作后再进行执行。它内部主要是维护了一个计数器，主线程先执行await，如果计数器大于0的话，那么就阻塞等待。当一个线程完成任务后，计数器的值减1，直到当计数器为0时，表示所有的线程已经完成任务，等待的主线程被唤醒然后继">
 
 
 
@@ -118,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://fairylss.cn/"/>
+  <link rel="canonical" href="http://fairylss.cn/2018/08/29/CountDownLatch-one/"/>
 
 
 
 
 
-  <title>LSS's Blog</title>
+  <title>CountDownLatch运用场景(1) | LSS's Blog</title>
   
 
 
@@ -143,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 <a href="https://github.com/Fairyhead/Fairyhead.github.io" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -282,143 +282,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fairylss.cn/2018/08/29/suggest/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LSS">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LSS's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/29/suggest/" itemprop="url">suggest</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-29T14:03:43+08:00">
-                2018-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#整理个书单和路线</p>
-<hr>
-<div><br>    <p>    &amp;nbsp&amp;nbsp最近有一些同学问我看什么书，我就一起列个书单发上面吧。还有需要学习的东西。（markdown用的不熟练，见谅），我也是个还没实习的菜鸡，我说的也不一定对哈。<br>    </p><br></div>
-
-<p>###先说书单</p>
-<p>&amp;nbsp&amp;nbsp<br>1、java部分:《java核心技术 卷一》，个人感觉看完实现一遍就差不多了。然后再把集合的源码看一遍，了解所有常见的集合框架与他们的底层实现，以及相互的区别。重点也就是那么几个。<br></p><p>举个例子，HashMap与concurrentHashMap，常问的就是底层是怎么实现的，java8对它们做了哪些改进，为什么要这么改（这里可能就要问你红黑树的原理了），HashMap为什么会有出现死循环的危险，是发生在什么时候的，为什么HashMap的长度是2^n（这里就要扯到位运算了），HashMap是线程安全的吗，你用过什么线程安全的类吗。concurrentHashMap为什么是线程安全的呢，分段锁的实现原理是怎样的呢。J.U.C包下还用过什么其他类吗。常用的原子操作类有哪些（这里就开始多线程的知识了，超级超级超级多！）集合的知识也没有具体的书可以看，所以只能去研究源码了，过程肯定超级痛苦。。。其实我觉得陈俊说的很对，一定要把知识成体系，就算问到你不是很清楚的问题的时候你也能回答的和正确答案比较像，其实多线程里面只要把CAS原理搞明白,volatile原理搞清楚，ABA问题,悲观锁乐观锁什么的，这些问题基本上你理解就会很容易。volatile就问问原理，为什么不能保持原子性什么的。。。反正就是看书</p>
-
-<p>其他的可以去牛客上把java基础的所有题刷完，之后再配合面经看看其中常见的坑就差不多了。比如说String常量池呀，包装类中的坑啊，比如Integer的缓存范围是-128~127，超过这个值的范围的比较会返回false什么的。反正注意坑就行了。如果不喜欢看书就看视频吧，毕向东的课还是挺有意思的，听他扯皮。</p><br>    <p><br>    &amp;nbsp&amp;nbsp我再推荐几本书吧，我水平也有限，目前也只看了《阿里巴巴java开发手册》，之后可以看看《java 8函数式编程》，《分布式java应用：基础与实践》等等。（有余力再看）<br>    </p><br><p></p><br><p>&amp;nbsp&amp;nbsp<br>2、jvm部分：《深入理解java虚拟机 jvm高级特性与最佳实践》，这本书没什么好说的，整本书背下来-。-！。对，就是这么粗暴。全都是重点。<br></p><br><p>&amp;nbsp&amp;nbsp<br>3、多线程部分：《java多线程编程核心技术》、《java并发编程实战》、《java并发编程的艺术》大概就是这么三本书，然后再配合一些博客和面经的部分，看看J.U.C包下比较重要的类，比如线程池原理呀，ThreadLocal原理呀（这里会和jvm一部分一起问什么时候会产生OOM,产生的原因是什么，如何解决什么的），CountDownLatch与CyclicBarrier的概念，锁机制，死锁条件，如何检查，lock，synchroinzed原理，优化等等等等，这是避不开的一部分。<br></p><br><p>&amp;nbsp&amp;nbsp<br>3.5、javaweb部分：这一部分呢，我划个3.5。主要是我本科就会，所以也不知道看什么书。。。前端方面需要了解，你至少要知道 html css js的功能是什么，jquery，ajax怎么写。就差不多了吧。我以前好像看的什么《javaweb开发实战》，李兴华的，我也不知道具体名字了，主要了解servlet，jsp，mvc模式，还有开发的一些流程。中间比如servlet生命周期呀，内置对象以及各自的作用域，session和cookie的区别这些东西你了解一下，学了这部分可以写个简单的留言板，（可以配合数据库）我觉得就差不多了。。反正东西都过时了。（但是还是得学，不然后面学ssm会头疼）<br></p><br><p>&amp;nbsp&amp;nbsp<br>4、数据库部分：《Mysql必知必会》、《高性能mysql》、《Mysql技术内幕：innodb存储引擎》，常用sql必须掌握，问你个查询，left join,right join啥的你得会写。重要的比如说，索引这个是必问的，索引底层是什么数据结构实现的，b树与b+树的区别，为什么b+树的性能比较好，myisam与innodb引擎的比较，适合的场景，东西特别多，我数据库也比较晕。。。<br></p><br><p>&amp;nbsp&amp;nbsp<br>5、Redis部分：《redis设计与实现》、《redis实战》，我只看过《redis设计与实现》，我redis处于入门阶段，只安装了用过一下，这里我只了解了底层的数据结构和原理。<br></p><br><p>&amp;nbsp&amp;nbsp<br>6、ssm部分：《Spring实战》，《跟开涛学SpringMVC》、《Mybatis技术内幕》、《javaee的颠覆者 Spring Boot》等等，大部头部分。东西贼多，配置贼麻烦。就算学了Spring Boot我一样觉得很麻烦。。。一般都理解的不够深入，就我的感觉来说，这里你只需要知道怎么用，做个项目，然后准备一下常见的问题就行了。看看博客什么的。比如说ioc控制反转，aop面向切面编程原理这是必问的，其他的还有mybatis会问一些，一些操作符的区别等等。<br></p><br><p>&amp;nbsp&amp;nbsp<br>7、zookeeper：《从Paxos到Zookeeper 分布式一致性原理与实践》，我也刚看，-。-！就不误人子弟了。<br></p><br><p>&amp;nbsp&amp;nbsp<br>8、分布式相关：《大型网站技术架构 核心原理与案例分析》，我目前只读了这本，只有一个想法，作者太屌了！这本书写的真的很好。之后我准备看《亿级流量网站架构核心技术》。<br></p><br><p>&amp;nbsp&amp;nbsp<br>9、消息队列：kafka，有需要再学吧<br></p><br><p>&amp;nbsp&amp;nbsp<br>10、其他：（放在这不是不重要哈，反而特别重要，跟上面的并行学习，都是面试要问的）<br><br>计算机网络：（可以看自顶向下，也可以看tcp/ip详解 卷1，本科学的是谢希仁版本的，都可以，看你喜欢哪个），主要就是看传输层以上的部分，udp和tcp区别呀，可靠传输中的算法呀，三次握手四次挥手的过程，以及为什么是三次，四次，https与http的区别这样的问题，反正问题很套路，背吧。。。<br><br><br>操作系统：《现代操作系统》，《深入理解计算机系统》，选一个看吧。都差不多。问题也很套路：进程间通信，线程间通信，线程生命周期，概念，定义，等等等。。。<br><br>数据结构与算法：《剑指offer》、《程序员代码面试指南》、leetcode前300题刷2-3遍。。。这个没啥好说的。必须干的事。<br></p>
-
-<p>###分割线</p>
-<p>&amp;nbsp&amp;nbsp<br>上面学完差不多可以找个二三线互联网公司的实习了，运气好另说。一些比较流行的东西也必须了解，我就直接举例子哈：maven，dubbo，nosql（redis就行了，mongodb了解下），消息中间件，session跨域共享，自动化部署，web服务器架构，持久层高并发架构，分布式接口技术，Spring Cloud微服务，搜索引擎，容器技术（这些做项目的时候你就会了解了，比如solr啊什么的）。性能优化部分了解：jvm优化，java程序优化，数据库优化，服务器优化，linux服务器优化。了解这些东西主要还是为了跟面试官扯，给你加分。（虽然我也很多不了解）<br></p>
-
-<p>###最后</p>
-<p>&amp;nbsp&amp;nbsp<br>差不多就这些东西了，要真正意义上学好，一年时间肯定不够，只能说学到哪算哪，不过找工作这个东西很玄学，有些人学的不好也能找到不错的工作，有些人学的好说不定连面试机会都没有。但是没办法，你总的学，你也不知道面试官要问什么。一次面试就那么一个多小时，多的阿里七八九面，小的oppo这样的公司就一面二面。反正加油吧。科研和工作安心做一样把他做好就行。<br></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -448,9 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/29/CountDownLatch-one/" itemprop="url">CountDownLatch运用场景(1)</a></h1>
+          <h1 class="post-title" itemprop="name headline">CountDownLatch运用场景(1)</h1>
         
 
         <div class="post-meta">
@@ -501,14 +365,10 @@
       
 
       
-        
-          
-            <p>最近阅读了J.U.C(java.util.concurrent)的一些源码，有空来总结一点东西。</p>
+        <p>最近阅读了J.U.C(java.util.concurrent)的一些源码，有空来总结一点东西。</p>
 <p>CountdownLatch也叫闭锁，它可以使一(多)个主线程必须等待其他线程完成操作后再进行执行。它内部主要是维护了一个计数器，主线程先执行await，如果计数器大于0的话，那么就阻塞等待。当一个线程完成任务后，计数器的值减1，直到当计数器为0时，表示所有的线程已经完成任务，等待的主线程被唤醒然后继续执行。</p>
 <p>它可以应用在主线程需要等待启动框架服务的线程已经完成之后再执行的这样一个场景下。比如：缓存加载</p>
 
-          
-        
       
     </div>
     
@@ -525,133 +385,32 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fairylss.cn/2018/08/28/hello/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LSS">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LSS's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/28/hello/" itemprop="url">终于搭建好了。</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-28T20:24:08+08:00">
-                2018-08-28
-              </time>
+              <a href="/2018/08/28/hello/" rel="next" title="终于搭建好了。">
+                <i class="fa fa-chevron-left"></i> 终于搭建好了。
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
+              <a href="/2018/08/29/suggest/" rel="prev" title="suggest">
+                suggest <i class="fa fa-chevron-right"></i>
+              </a>
             
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>只能说努力吧。技术突飞猛进的一个暑假，也是养成习惯的一个暑假。接下来会总结一些算法数据结构和一些读书总结，书单什么的。都是自己的理解。希望能更深入的理解这些知识，为来年的面试做准备。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -661,10 +420,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -672,6 +432,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -928,6 +692,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
